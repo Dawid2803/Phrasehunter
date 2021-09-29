@@ -13,7 +13,6 @@ class Game{
 /**
 * Creates phrases for use in game
 * @return {array} An array of phrases that could be used in the game
-* @argument(amount) stipulates the amount of phrases that needs to be created
 */
 
     createPhrases(){
@@ -43,10 +42,38 @@ getRandomPhrase() {
 */  
 startGame() {
     document.getElementById('overlay').style.display = 'none';
-    this.activePhrase = this.getRandomPhrase();
-    console.log(this.activePhrase);
-    this.activePhrase.addPhraseToDisplay();
+    const calledPhrase = this.getRandomPhrase();
+    calledPhrase.addPhraseToDisplay();
+    this.activePhrase = calledPhrase;
+    console.log(this.activePhrase.phrase);
 
 };
+
+/**
+* Checks for winning move
+* @return {boolean} True if game has been won, false if game wasn't
+won
+*/
+checkForWin() {
+    const hiddenLetters = document.querySelectorAll('.hide');
+    if(hiddenLetters.length === 0){
+        return true;
+    }else{
+        return false;
+    }
+};
+
+/**
+* Increases the value of the missed property
+* Removes a life from the scoreboard
+* Checks if player has remaining lives and ends game if player is out
+*/
+removeLife() {};
+
+/**
+* Displays game over message
+* @param {boolean} gameWon - Whether or not the user won the game
+*/
+gameOver(gameWon) {};
     
 }
