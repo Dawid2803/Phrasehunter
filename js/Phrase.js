@@ -10,9 +10,11 @@ class Phrase{
 /**
 * Display phrase on game board
 */
-    addPhraseToDisplay(){
+    addPhraseToDisplay(activePhrase){
         let phraseDisplay = document.querySelector('#phrase');
-        const randomPhrase = game.getRandomPhrase().phrase;
+        //takes the random phrase chosen with the getRandomPhrase function
+        //and itirates through it, creating li items for each character
+        const randomPhrase = activePhrase;
         for(let i = 0; i < randomPhrase.length; i++){
             if(randomPhrase[i] === ' '){
                 const space = `<li class="space"> </li>`;
