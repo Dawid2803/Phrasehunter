@@ -10,11 +10,11 @@ class Phrase{
 /**
 * Display phrase on game board
 */
-    addPhraseToDisplay(activePhrase){
+    addPhraseToDisplay(){
         let phraseDisplay = document.querySelector('#phrase');
         //takes the random phrase chosen with the getRandomPhrase function
         //and itirates through it, creating li items for each character
-        const randomPhrase = activePhrase;
+        const randomPhrase = this.phrase;
         for(let i = 0; i < randomPhrase.length; i++){
             if(randomPhrase[i] === ' '){
                 const space = `<li class="space"> </li>`;
@@ -31,14 +31,7 @@ class Phrase{
 * @param (string) letter - Letter to check
 */
 checkLetter(letter) {
-    for(let i = 0; i < activePhrase.phrase.length; i++){
-        if(letter === activePhrase.phrase[i]){
-            return true;
-        }
-        else{
-            return false
-        };
-    }
+    return this.phrase.includes(letter);  
 };
 
 /**
