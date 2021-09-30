@@ -20,6 +20,7 @@ const keyboard = document.getElementById('qwerty');
 function handleInteraction(button){
     if(button.target.tagName === "BUTTON"){
         console.log(button.target);
+        
     }
 }
 
