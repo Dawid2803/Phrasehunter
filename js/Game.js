@@ -68,12 +68,36 @@ checkForWin() {
 * Removes a life from the scoreboard
 * Checks if player has remaining lives and ends game if player is out
 */
-removeLife() {};
+
+removeLife() {
+    this.missed += 1;
+    //const scoreboard = document.getElementById('scoreboard');
+    const lives = document.getElementsByClassName('tries');
+    lives[lives.length - this.missed].firstElementChild.src = 'images/lostHeart.png';
+    lives[lives.length - this.missed].firstElementChild.alt = 'Lost Heart Icon';
+    if(this.missed >= 5){
+        this.gameOver(false);
+    }
+};
+
 
 /**
 * Displays game over message
 * @param {boolean} gameWon - Whether or not the user won the game
 */
-gameOver(gameWon) {};
+gameOver(gameWon) {
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'initial';
+    overlay.classList.remove('start');
+
+    const gameOverScreenMessage = document.querySelector('#game-over-message');
+    if(gameWon){
+        overlay.classList.add('win');
+        gameOverScreenMessage.innerHTML = 'Great Job you won!';
+    }else{
+        overlay.classList.add('lose');
+        gameOverScreenMessage.innerHTML = 'Sorry, better luck next time!';
+    }
+};
     
 }
