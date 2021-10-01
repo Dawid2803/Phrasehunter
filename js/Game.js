@@ -41,11 +41,22 @@ getRandomPhrase() {
 * Begins game by selecting a random phrase and displaying it to user
 */  
 startGame() {
-    document.getElementById('overlay').style.display = 'none';
+    const overlay = document.getElementById('overlay')
+
+    if(overlay.className === 'start'){
+    overlay.style.display = 'none';
     const calledPhrase = this.getRandomPhrase();
     calledPhrase.addPhraseToDisplay();
     this.activePhrase = calledPhrase;
     console.log(this.activePhrase.phrase);
+    }
+    else if(overlay.className === 'win' || overlay.className === 'lose'){
+        overlay.style.display = 'none';
+        this.phraseReset();
+        this.buttonsReset();
+        this.resetLives();
+        overlay.className = 'start';
+    }
 
 };
 
@@ -80,6 +91,37 @@ removeLife() {
     }
 };
 
+// Helper function when resetting the game.
+// resets all the heart icons to the original images and sets this.missed = 0.
+resetLives(){
+    this.missed = 0;
+    const lives = document.getElementsByClassName('tries');
+    for(let i = 0; i < lives.length; i++){
+        lives[i].firstElementChild.src = 'images/liveHeart.png';
+        lives[i].firstElementChild.alt = 'Heart Icon';
+    }
+}
+
+// Helper function when resetting the game.
+// resets all the buttons to their original state(not disabled or highlighted) when restarting the game.
+buttonsReset(){
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+        button.disabled = false;
+        if(button.className === 'chosen' || button.className === 'wrong'){
+            button.className = 'key';
+        }
+    });
+}
+
+// Helper function when resetting the game.
+// removes the previous activePhrase and replaces it with a new phrase. 
+phraseReset(){
+    this.activePhrase = null;
+    this.activePhrase = this.getRandomPhrase();
+    document.querySelector('#phrase').innerHTML = '';
+    this.activePhrase.addPhraseToDisplay();
+}
 
 /**
 * Displays game over message
@@ -99,22 +141,38 @@ gameOver(gameWon) {
         gameOverScreenMessage.innerHTML = 'Sorry, better luck next time!';
     }
 };
-
+/**
+ * Handles the user key presses do determine the outcome of the game
+ * @param {event} button - uses the event from the eventlistener
+ */
 handleInteraction(button){
     if(button.target.tagName === "BUTTON"){
         console.log(button.target);
         let buttonPress = button.target.textContent;
         const chosenPhrase = this.activePhrase;
         button.target.disabled = true;
+        //If user clicks or presses the correct key:
+        //   the matching key inside the phrase will be added to the display.
+        //   the matching key will be highlighted blue.
+        //Also checks to see if the user has one after each correct keypress.
+            //if user won, the winning gameover screen is shown.
 
         if(chosenPhrase.checkLetter(buttonPress)){
             chosenPhrase.showMatchedLetter(buttonPress);
-            button.target.classList.add('chosen')
+            button.target.classList.remove('key');
+            button.target.classList.add('chosen');
             
             if(this.checkForWin()){
                 this.gameOver(true);
             };
+
+        //if user clicks or presses are incorrect:
+        //   the user will lose a life.
+        //  also checks to see whether the user as lost all of his/her lives.
+        //  if all lives are lost, the losing game over screen is shown.
+
         }else{
+            button.target.classList.remove('key');
             button.target.classList.add('wrong');
             this.removeLife();
         };
@@ -122,5 +180,6 @@ handleInteraction(button){
 
     }
 }
-    
+
+
 }
