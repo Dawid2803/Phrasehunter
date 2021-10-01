@@ -93,11 +93,34 @@ gameOver(gameWon) {
     const gameOverScreenMessage = document.querySelector('#game-over-message');
     if(gameWon){
         overlay.classList.add('win');
-        gameOverScreenMessage.innerHTML = 'Great Job you won!';
+        gameOverScreenMessage.innerHTML = 'Great job you won!';
     }else{
         overlay.classList.add('lose');
         gameOverScreenMessage.innerHTML = 'Sorry, better luck next time!';
     }
 };
+
+handleInteraction(button){
+    if(button.target.tagName === "BUTTON"){
+        console.log(button.target);
+        let buttonPress = button.target.textContent;
+        const chosenPhrase = this.activePhrase;
+        button.target.disabled = true;
+
+        if(chosenPhrase.checkLetter(buttonPress)){
+            chosenPhrase.showMatchedLetter(buttonPress);
+            button.target.classList.add('chosen')
+            
+            if(this.checkForWin()){
+                this.gameOver(true);
+            };
+        }else{
+            button.target.classList.add('wrong');
+            this.removeLife();
+        };
+
+
+    }
+}
     
 }
