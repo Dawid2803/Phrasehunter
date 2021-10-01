@@ -146,7 +146,7 @@ gameOver(gameWon) {
  * @param {event} button - uses the event from the eventlistener
  */
 handleInteraction(button){
-    if(button.target.tagName === "BUTTON"){
+    
         console.log(button.target);
         let buttonPress = button.target.textContent;
         const chosenPhrase = this.activePhrase;
@@ -178,7 +178,7 @@ handleInteraction(button){
         };
 
 
-    }
+    
 }
 
 
