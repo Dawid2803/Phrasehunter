@@ -12,7 +12,6 @@ resetButton.addEventListener('click', () =>{
 });
 
 const keyboard = document.getElementById('qwerty');
-const keyboardButtons = document.querySelectorAll('button');
 /**
 * Handles onscreen keyboard button clicks
 * @param (HTMLButtonElement) button - The clicked button element
