@@ -12,6 +12,7 @@ resetButton.addEventListener('click', () =>{
 });
 
 const keyboard = document.getElementById('qwerty');
+const keyboardButtons = document.querySelectorAll('button');
 /**
 * Handles onscreen keyboard button clicks
 * @param (HTMLButtonElement) button - The clicked button element
@@ -24,11 +25,4 @@ keyboard.addEventListener('click', (e) => {
     }
 });
 
-// document.addEventListener('keydown', (e) => {
-//     const keyValidator = /^[a-z]$/.test(e.key);
-//     if(keyValidator){
-//         game.handleInteraction(e);
-//     }
-//     console.log(e.key);
 
-// });

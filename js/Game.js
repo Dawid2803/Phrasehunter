@@ -48,7 +48,6 @@ startGame() {
     const calledPhrase = this.getRandomPhrase();
     calledPhrase.addPhraseToDisplay();
     this.activePhrase = calledPhrase;
-    console.log(this.activePhrase.phrase);
     }
     else if(overlay.className === 'win' || overlay.className === 'lose'){
         overlay.style.display = 'none';
@@ -147,7 +146,6 @@ gameOver(gameWon) {
  */
 handleInteraction(button){
     
-        console.log(button.target);
         let buttonPress = button.target.textContent;
         const chosenPhrase = this.activePhrase;
         button.target.disabled = true;
